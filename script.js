@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = userPrompt();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -14,32 +14,33 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
-const resultElement = document.getElementById("result")
-const randomFunction = {
-  lower: getRandomLower,
-  upper: getRandomUpper,
-  number: getRandomNumber,
-  symbol: getRandomSymbol
-};
+//Create Character pool with different character arrays
+//create function to prompt user on what king of characters they want and how long they want the password >8<128
+//Create helper function to randomize characters
+//create "generate password" funtion that returns random password based on users choice
 
-// generator fuction
+var numericCharacters =  ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var specialCharacters = [  '@',  '%',  '+',  '\\',  '/',  "'",  '!',  '#',  '$',  '^',  '?',  ':',  ',',  ')',  '(',  '}',  '{',  ']',  '[',  '~',  '-',  '_',  '.'];
+var lowerCase = [  'a',  'b',  'c',  'd',  'e',  "f",  'g',  'h',  'i',  'j',  'k',  'l',  'm',  'n',  'o',  'p',  'q',  'r',  's',  't',  'u',  'v',  'w',  'x',  'y',  'z'];
+var upperCase = [  'A',  'B',  'C',  'D',  'E',  "F",  'G',  'H',  'I',  'J',  'K',  'L',  'M',  'N', 'O',  'P',  'Q',  'R',  'S',  'R',  'U',  'V',  'W',  'X',  'Y',  'Z'];
 
-//function for lower case alphabet
-function getRandomLower(){
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+function userPrompt (){
+  var passwordLimit = prompt ("How long would you like your password to be?")
+if ( passwordLimit < 8 || passwordLimit > 128 ) 
+
+{alert ("Password need to be greater than 8 and less than 128 characters")  
+return 
 }
-//funtion for Upper case alphabet
-function getRandomUpper(){
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
+var confirmNumbers = confirm("Would you like to have numbers in your password?")
 
-//function for random Numbers
-//function getRandomNumber(){
-  //return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-//}
-function getRandomSymbol(){
-  const symbols = "!@#$%^&*";
-  return symbols[Math.floor(Math.random() * symbols.length)];
+var confirmCharacters = confirm("Would you like to use special Characters?")
+var confirmLower = confirm("would you like to use lower case letters?")
+var confirmUpper = confirm("would you like to use Upper case letters?")
 }
 
-console.log(getRandomSymbol());
+
+
+function shuffle (){
+
+}
+
