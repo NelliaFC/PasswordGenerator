@@ -25,6 +25,8 @@ var lowerCase = [  'a',  'b',  'c',  'd',  'e',  "f",  'g',  'h',  'i',  'j',  '
 var upperCase = [  'A',  'B',  'C',  'D',  'E',  "F",  'G',  'H',  'I',  'J',  'K',  'L',  'M',  'N', 'O',  'P',  'Q',  'R',  'S',  'R',  'U',  'V',  'W',  'X',  'Y',  'Z'];
                    
 function shuffle (array){
+  
+  
   //grabs a randome index from selected array
 var chooseRandomIndex = (Math.floor(Math.random * array.length)) 
 //gives actual value of random index seleected above
@@ -33,6 +35,7 @@ return indexValue;
 }
 
 
+//for([initial expression]; [condition]; [increment expression]) {statement
 
 
 function userPrompt (){
@@ -67,7 +70,49 @@ return userChoice
 
 
 
-function shuffle (){
+function generatePassword (){
+var newPassword = []
+//create staging array
+var stagingArray = []
+var returnUserChoice = userPrompt ()//var returnUserChoice.numeric - test if returns "numeric". do for each.
 
+
+
+
+
+
+  // If have Lower case , then choose Upper - if not, else - choose Lower
+if (returnUserChoice.lower === true) {
+  stagingArray = stagingArray.concat (lowerCase) //into a stagingArray concactenate lowerCase array
+  stagingArray.push (shuffle(lowerCase))
 }
+
+  //If have Upper case , then choose Number - if not, else - choose Number
+  if (returnUserChoice.upper === true) {
+    stagingArray = stagingArray.concat (upperCase) //into a stagingArray concactenate lowerCase array
+    stagingArray.push (shuffle(upperCase))
+  //If have lower case , then choose upper - if not, else - choose lower
+  if (returnUserChoice.numeric === true) {
+    stagingArray = stagingArray.concat (numericCharacters) //into a stagingArray concactenate lowerCase array
+    stagingArray.push (shuffle(numericCharacters))
+ // If have lower case , then choose upper - if not, else - choose lower
+
+ if (returnUserChoice.special === true) {
+  stagingArray = stagingArray.concat (specialCharacters) //into a stagingArray concactenate lowerCase array
+  stagingArray.push (shuffle(specialCharacters))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
