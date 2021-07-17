@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = userPrompt();
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -26,24 +26,20 @@ var upperCase = [  'A',  'B',  'C',  'D',  'E',  "F",  'G',  'H',  'I',  'J',  '
                    
 function shuffle (array){
   
-  
   //grabs a randome index from selected array
-var chooseRandomIndex = (Math.floor(Math.random * array.length)) 
-//gives actual value of random index seleected above
+var chooseRandomIndex = (Math.floor(Math.random() * array.length)) 
+//gives actual value of random index selected above
 var indexValue = array[chooseRandomIndex] 
 return indexValue;
 }
 
 
-//for([initial expression]; [condition]; [increment expression]) {statement
-
-
 function userPrompt (){
-  var passwordLimit = prompt ("How long would you like your password to be?")
+  var passwordLimit =parseInt (prompt ("How long would you like your password to be?"))
 if ( passwordLimit < 8 || passwordLimit > 128 ) 
 
 {alert ("Password need to be greater than 8 and less than 128 characters")  
-return 
+return;
 }
 var confirmNumbers = confirm("Would you like to have numbers in your password?")
 
@@ -53,62 +49,60 @@ var confirmUpper = confirm("would you like to use Upper case letters?")
 
 
 var userChoice = {
+length: passwordLimit,
 numeric: confirmNumbers,
 special: confirmCharacters,
 lower: confirmLower,
-upper: confirmUpper,
+upper: confirmUpper
 
-length: passwordLimit
 }
+
 console.log(userChoice)
 return userChoice
-
-
-
-
 }
 
 
-
-function generatePassword (){
+function generatePassword(){
+var returnUserChoice = userPrompt()
 var newPassword = []
 //create staging array
 var stagingArray = []
-var returnUserChoice = userPrompt ()//var returnUserChoice.numeric - test if returns "numeric". do for each.
+//var returnUserChoice.numeric - test if returns "numeric". do for each.
 
-
-
-
-
-
+console.log(returnUserChoice.lower)
   // If have Lower case , then choose Upper - if not, else - choose Lower
-if (returnUserChoice.lower === true) {
-  stagingArray = stagingArray.concat (lowerCase) //into a stagingArray concactenate lowerCase array
-  stagingArray.push (shuffle(lowerCase))
+if (returnUserChoice.lower == true ) {
+  stagingArray = stagingArray.concat(lowerCase) //into a stagingArray concactenate lowerCase array
+  stagingArray.push(shuffle(lowerCase))
 }
 
-  //If have Upper case , then choose Number - if not, else - choose Number
-  if (returnUserChoice.upper === true) {
-    stagingArray = stagingArray.concat (upperCase) //into a stagingArray concactenate lowerCase array
-    stagingArray.push (shuffle(upperCase))
-  //If have lower case , then choose upper - if not, else - choose lower
-  if (returnUserChoice.numeric === true) {
-    stagingArray = stagingArray.concat (numericCharacters) //into a stagingArray concactenate lowerCase array
-    stagingArray.push (shuffle(numericCharacters))
- // If have lower case , then choose upper - if not, else - choose lower
+   //If have Upper case , then choose Number - if not, else - choose Number
+   if (returnUserChoice.upper === true){
+     stagingArray = stagingArray.concat(upperCase) //into a stagingArray concactenate lowerCase array
+     stagingArray.push(shuffle(upperCase))
+   }
+   //If have lower case , then choose upper - if not, else - choose lower
+   if (returnUserChoice.numeric === true){
+     stagingArray = stagingArray.concat(numericCharacters) //into a stagingArray concactenate lowerCase array
+     stagingArray.push(shuffle(numericCharacters))
+   }
+//  // If have lower case , then choose upper - if not, else - choose lower
 
- if (returnUserChoice.special === true) {
-  stagingArray = stagingArray.concat (specialCharacters) //into a stagingArray concactenate lowerCase array
-  stagingArray.push (shuffle(specialCharacters))
+  if (returnUserChoice.special === true){
+   stagingArray = stagingArray.concat(specialCharacters) //into a stagingArray concactenate lowerCase array
+   stagingArray.push(shuffle(specialCharacters))
+ }
+
+
+
+for (var i = 0; i < returnUserChoice.length; i++){
+var almostThere = shuffle(stagingArray)
+newPassword.push(almostThere)
+
 }
-
-
-
-
-
-
-
-
+console.log (newPassword)
+return newPassword.join ("")
+}
 
 
 
